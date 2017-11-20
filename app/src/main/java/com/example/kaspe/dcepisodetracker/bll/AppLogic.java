@@ -29,6 +29,8 @@ public class AppLogic {
 
     private AppLogic() {
         dm = new DataManager();
+        date = "Not Yet Set";
+        time = "Not Yet Set";
     }
     // End Singleton
 

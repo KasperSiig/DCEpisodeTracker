@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();  // Always call the superclass method first
         try {
             makeButtons();
+            mainModel.setDate();
+            mainModel.setTime();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

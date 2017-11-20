@@ -33,8 +33,12 @@ public class DateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String day = String.valueOf(datePicker.getDayOfMonth());
-                String month = String.valueOf(datePicker.getMonth());
+                String month = String.valueOf(datePicker.getMonth() + 1);
                 String year = String.valueOf(datePicker.getYear());
+
+                day = (Integer.parseInt(day) < 10) ? ("0" + day) : day;
+                month = (Integer.parseInt(month) < 10) ? ("0" + month) : month;
+
                 dateModel.setDate(day + "-" + month + "-" + year);
                 finish();
             }

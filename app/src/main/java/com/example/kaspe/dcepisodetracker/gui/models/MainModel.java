@@ -27,4 +27,12 @@ public class MainModel {
     public void removeEpisode(Episode episode, Context ctx) throws IOException {
         appLogic.removeEpisode(episode, ctx);
     }
+
+    public void setDate() {
+        appLogic.setDate("Not Yet Set");
+    }
+
+    public void setTime() {
+        appLogic.setTime("Not Yet Set");
+    }
 }

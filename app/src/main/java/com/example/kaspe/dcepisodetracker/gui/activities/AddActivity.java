@@ -9,7 +9,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.kaspe.dcepisodetracker.R;
+import com.example.kaspe.dcepisodetracker.be.Episode;
 import com.example.kaspe.dcepisodetracker.gui.models.AddModel;
+
+import java.io.IOException;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -38,7 +41,7 @@ public class AddActivity extends AppCompatActivity {
         lblDate = (TextView) findViewById(R.id.lblDate);
         lblTime = (TextView) findViewById(R.id.lbltime);
 
-        //setBtnAdd();
+        setBtnAdd();
         setBtnDate();
         setBtnTime();
 
@@ -48,8 +51,9 @@ public class AddActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();  // Always call the superclass method first
         setDateText();
+        setTimeText();
     }
-/*
+
     public void setBtnAdd() {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +67,7 @@ public class AddActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }*/
+    }
 
     public void setBtnDate() {
         btnDate.setOnClickListener(new View.OnClickListener() {
@@ -92,16 +96,21 @@ public class AddActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DateActivity.class);
         startActivity(intent);
     }
-    /*
+
     private void addEpisode() throws IOException {
         String name = etName.getText().toString();
         String season = etSeason.getText().toString();
         String episodeText = etEpisode.getText().toString();
+        String date = addModel.getTime() + " " + addModel.getDate();
         Episode episode = new Episode(name, Integer.parseInt(season), Integer.parseInt(episodeText), date);
         addModel.addEpisode(episode, this);
-    }*/
+    }
 
     private void setDateText() {
         lblDate.setText(addModel.getDate());
+    }
+
+    private void setTimeText() {
+        lblTime.setText(addModel.getTime());
     }
 }
