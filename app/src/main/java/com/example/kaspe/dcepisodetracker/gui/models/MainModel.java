@@ -1,5 +1,7 @@
 package com.example.kaspe.dcepisodetracker.gui.models;
 
+import android.content.Context;
+
 import com.example.kaspe.dcepisodetracker.be.Episode;
 import com.example.kaspe.dcepisodetracker.bll.AppLogic;
 
@@ -18,9 +20,11 @@ public class MainModel {
         appLogic = AppLogic.getInstance();
     }
 
-    public List<Episode> getEpisodes() throws IOException, ClassNotFoundException {
-        return appLogic.getEpisodes();
+    public List<Episode> getEpisodes(Context ctx) throws IOException, ClassNotFoundException {
+        return appLogic.getEpisodes(ctx);
     }
 
-
+    public void removeEpisode(Episode episode, Context ctx) throws IOException {
+        appLogic.removeEpisode(episode, ctx);
+    }
 }

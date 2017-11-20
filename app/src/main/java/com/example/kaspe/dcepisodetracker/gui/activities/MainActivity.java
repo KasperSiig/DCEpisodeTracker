@@ -1,5 +1,6 @@
 package com.example.kaspe.dcepisodetracker.gui.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.kaspe.dcepisodetracker.R;
 import com.example.kaspe.dcepisodetracker.be.Episode;
@@ -38,24 +38,23 @@ public class MainActivity extends AppCompatActivity {
 
         setBtnStart();
         try {
-            showEpisodes();
-
+            makeButtons();
         } catch (IOException e) {
-            TextView tv = new TextView(this);
-            tv.setText("hello");
-            lLayout.addView(tv);
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private void showEpisodes() throws IOException, ClassNotFoundException {
-        List<Episode> episodes = mainModel.getEpisodes();
-        for(Episode episode : episodes) {
-            TextView textView = new TextView(this);
-            textView.setText(String.valueOf(episode.getDate()));
-            lLayout.addView(textView);
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+        try {
+            makeButtons();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -71,5 +70,34 @@ public class MainActivity extends AppCompatActivity {
     private void openAdd() {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
+    }
+
+    private void makeButtons() throws IOException, ClassNotFoundException {
+        lLayout.removeAllViews();
+        List<Episode> episodes = mainModel.getEpisodes(this);
+        for (final Episode episode : episodes) {
+            Button btn = new Button(this);
+            String text = episode.getSeason() + "x" + episode.getEpisode() + " - " + episode.getName();
+            btn.setText(text);
+            final Context ctx = this;
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        mainModel.removeEpisode(episode, ctx);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        makeButtons();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            lLayout.addView(btn);
+        }
     }
 }

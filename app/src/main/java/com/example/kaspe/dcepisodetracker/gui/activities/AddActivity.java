@@ -33,11 +33,11 @@ public class AddActivity extends AppCompatActivity {
         etEpisode = (EditText) findViewById(R.id.etEpisode);
         etDate = (EditText) findViewById(R.id.etDate);
 
-        setBtnStart();
+        setBtnAdd();
 
     }
 
-    public void setBtnStart() {
+    public void setBtnAdd() {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,7 +47,7 @@ public class AddActivity extends AppCompatActivity {
                     etName.setText("hello");
                     e.printStackTrace();
                 }
-                //finish();
+                finish();
             }
         });
     }
@@ -58,6 +58,6 @@ public class AddActivity extends AppCompatActivity {
         String episodeText = etEpisode.getText().toString();
         String date = etDate.getText().toString();
         Episode episode = new Episode(name, Integer.parseInt(season), Integer.parseInt(episodeText), date);
-        addModel.addEpisode(episode);
+        addModel.addEpisode(episode, this);
     }
 }

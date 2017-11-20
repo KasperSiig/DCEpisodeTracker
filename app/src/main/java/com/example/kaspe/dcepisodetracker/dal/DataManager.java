@@ -1,5 +1,7 @@
 package com.example.kaspe.dcepisodetracker.dal;
 
+import android.content.Context;
+
 import com.example.kaspe.dcepisodetracker.be.Episode;
 
 import java.io.FileInputStream;
@@ -7,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,8 +17,9 @@ import java.util.List;
 
 public class DataManager {
 
-    public void saveEpisodes(List<Episode> episodes) throws IOException {
-        FileOutputStream out = new FileOutputStream("episodes.ser");
+    public void saveEpisodes(List<Episode> episodes, Context ctx) throws IOException {
+        FileOutputStream out = ctx.openFileOutput("episodes.ser", Context.MODE_PRIVATE);
+
 
         ObjectOutputStream oout = new ObjectOutputStream(out);
         oout.writeObject(episodes);
@@ -25,16 +27,13 @@ public class DataManager {
         out.close();
     }
 
-    public List<Episode> loadEpisodes() throws IOException, ClassNotFoundException {
+    public List<Episode> getEpisodes(Context ctx) throws IOException, ClassNotFoundException {
 
-        List<Episode> episodes = new ArrayList<>();
-        FileInputStream in = new FileInputStream("episodes.ser");
+        List<Episode> episodes;
+        FileInputStream in = ctx.openFileInput("episodes.ser");
 
         ObjectInputStream ois = new ObjectInputStream(in);
-        Episode episode;
-        while ((episode = (Episode) ois.readObject()) != null) {
-            episodes.add(episode);
-        }
+        episodes = (List<Episode>) ois.readObject();
         in.close();
         ois.close();
         return episodes;

@@ -1,5 +1,7 @@
 package com.example.kaspe.dcepisodetracker.gui.models;
 
+import android.content.Context;
+
 import com.example.kaspe.dcepisodetracker.be.Episode;
 import com.example.kaspe.dcepisodetracker.bll.AppLogic;
 
@@ -17,8 +19,8 @@ public class AddModel {
         appLogic = AppLogic.getInstance();
     }
 
-    public void addEpisode(Episode episode) throws IOException {
-        appLogic.addEpisode(episode);
+    public void addEpisode(Episode episode, Context ctx) throws IOException {
+        appLogic.addEpisode(episode, ctx);
     }
 
 }
