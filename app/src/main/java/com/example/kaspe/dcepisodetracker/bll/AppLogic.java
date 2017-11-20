@@ -36,6 +36,9 @@ public class AppLogic {
 
     private List<Episode> episodes = new ArrayList<>();
 
+    private String date;
+    private String time;
+
     public List<Episode> getEpisodes(Context ctx) throws IOException, ClassNotFoundException {
         episodes = dm.getEpisodes(ctx);
         Collections.sort(episodes, new Comparator<Episode>() {
@@ -60,5 +63,21 @@ public class AppLogic {
             }
         }
         dm.saveEpisodes(episodes, ctx);
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getTime() {
+        return time;
     }
 }

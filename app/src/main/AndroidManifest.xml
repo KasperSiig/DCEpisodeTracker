@@ -16,12 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".gui.activities.AddActivity"
+        <activity
+            android:name=".gui.activities.AddActivity"
             android:parentActivityName=".gui.activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".gui.activities.MainActivity" />
         </activity>
+        <activity android:name=".gui.activities.DateActivity" />
+        <activity android:name=".gui.activities.TimeActivity"></activity>
     </application>
 
 </manifest>

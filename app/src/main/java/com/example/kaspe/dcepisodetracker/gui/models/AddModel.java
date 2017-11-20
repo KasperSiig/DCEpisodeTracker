@@ -23,4 +23,12 @@ public class AddModel {
         appLogic.addEpisode(episode, ctx);
     }
 
+    public String getDate() {
+        return appLogic.getDate();
+    }
+
+    public String getTime() {
+        return appLogic.getTime();
+    }
+
 }
